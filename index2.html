@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>متجر نمطي - Nike-like Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#ff4655; /* energetic accent like Nike */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1200px;
+      --gap:18px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,#071025 0%, #0b1220 60%);
+      color:#eef2f7;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px 20px;
+      display:flex;
+      justify-content:center;
+    }
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:28px;\    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{
+      width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff9aa2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    }
+    .brand h1{margin:0;font-size:18px}
+    nav{display:flex;gap:12px;align-items:center}
+    .nav-link{color:var(--muted);text-decoration:none;font-weight:500}
+
+    .search{flex:1;margin:0 20px;display:flex;align-items:center}
+    .search input{
+      flex:1;padding:12px 14px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:inherit;outline:none
+    }
+    .actions{display:flex;gap:12px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff7a7a);border:none;color:white;font-weight:700}
+
+    .hero{
+      display:flex;gap:20px;align-items:center;margin-bottom:26px;padding:20px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border-radius:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6)
+    }
+    .hero-left{flex:1}
+    .hero-right{width:320px;display:flex;justify-content:center}
+    .hero h2{margin:0;font-size:26px}
+    .hero p{color:var(--muted);margin-top:8px}
+    .tag{display:inline-block;margin-top:12px;background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:999px;font-weight:700}
+
+    /* products grid */
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin:18px 0}
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--gap);
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);padding:14px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:12px;transition:transform .18s ease, box-shadow .18s ease
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,6,23,0.6)}
+    .thumb{height:160px;border-radius:12px;background:linear-gradient(135deg,#0b1220, #123);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .price{font-weight:800}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .rating{color:goldenrod;font-weight:700}
+    .small{color:var(--muted);font-size:13px}
+
+    footer{margin-top:30px;color:var(--muted);text-align:center}
+
+    /* responsive */
+    @media (max-width:720px){
+      .hero{flex-direction:column}
+      .hero-right{width:100%}
+      header{flex-direction:column;align-items:flex-start}
+      .search{margin:12px 0}
+    }
+
+    /* product quick actions */
+    .row{display:flex;gap:10px}
+    .chip{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:600}
+
+    /* simple modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:50}
+    .modal.open{display:flex}
+    .modal-card{width:92%;max-width:760px;background:linear-gradient(180deg,#071025,#071a2b);padding:18px;border-radius:16px}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .close{background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">S</div>
+        <div>
+          <h1>SKETCH</h1>
+          <div class="small">متجر أحذية وملابس رياضية</div>
+        </div>
+      </div>
+      <div class="search">
+        <input placeholder="ابحث عن حذاء، تيشيرت، أو قطعة..." aria-label="search" id="searchInput">
+      </div>
+      <div class="actions">
+        <button class="btn">فئات</button>
+        <button class="btn">المفضلة</button>
+ <nav>
+            <a href="shop.html"><button class="btn primary" id="cartBtn">سلة (0)</button></a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <span class="tag">إصدار جديد</span>
+        <h2>Athletic Performance — إحصل على أفضل أداء</h2>
+        <p>تشكيلة أحذية وملابس رياضية مستوحاة من أفضل العلامات. عرض محدود وكمية محدودة.</p>
+        <div style="margin-top:14px;display:flex;gap:10px">
+          <button class="btn primary">تسوّق الآن</button>
+          <button class="btn">اكتشف المزيد</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div style="width:260px;height:260px;border-radius:18px;background:linear-gradient(135deg,#0a1224, #1b2740);display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <img src="https://images.unsplash.com/photo-1528701800489-476f1a4f6f5b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="shoe" style="width:320px;transform:rotate(-12deg);filter:drop-shadow(0 10px 30px rgba(0,0,0,0.6));">
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h3>المنتجات الأكثر مبيعًا</h3>
+      <div class="row">
+        <div class="chip">جديد</div>
+        <div class="chip">تخفيضات</div>
+      </div>
+    </div>
+
+    <main class="grid" id="productsGrid">
+      <!-- product cards will be injected by JS -->
+    </main>
+
+    <footer>
+      © 2025 Sketch — تصميم تجريبي شبيه بـ Nike. هذا المشروع تعليمي فقط.
+    </footer>
+  </div>
+
+  <!-- modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 id="modalTitle">تفاصيل المنتج</h4>
+        <button class="close" id="closeModal">إغلاق ✕</button>
+      </div>
+      <div class="modal-grid">
+        <div id="modalImage" style="border-radius:12px;overflow:hidden;background:var(--card);height:300px;display:flex;align-items:center;justify-content:center"></div>
+        <div>
+          <p id="modalDesc" class="small">وصف المنتج.</p>
+          <p class="price" id="modalPrice">$0</p>
+          <div style="margin-top:12px;display:flex;gap:10px">
+            <button class="btn primary" id="addToCart">أضف إلى السلة</button>
+            <button class="btn" id="buyNow">اشتري الآن</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // sample product data (replace with real data or API)
+    const products = [
+      {id:1,title:'Nike Runner X',price:129,desc:'حذاء مخصص للجري، خفيف ومرن.',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder'},
+      {id:2,title:'Court Sneaker',price:89,desc:'حذاء كلاسيكي لمختلف الاستخدامات اليومية.',img:'https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder'},
+      {id:3,title:'Air Training Pro',price:149,desc:'ثبات ومرونة خلال التمارين الشاقة.',img:'https://images.unsplash.com/photo-1600180758890-6a3a22a9f3d7?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder'},
+      {id:4,title:'Speedfly 2',price:115,desc:'تصميم هوائي للسرعات العالية.',img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder'},
+      {id:5,title:'Trail Master',price:139,desc:'مخصّص للمغامرات على الطرق الوعرة.',img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder'},
+      {id:6,title:'Everyday Runner',price:99,desc:'راحة طوال اليوم وتصميم عصري.',img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder'}
+    ];
+
+    const grid = document.getElementById('productsGrid');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+    const cartBtn = document.getElementById('cartBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    let cartCount = 0;
+
+    function renderProducts(list){
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="thumb"><img src="${p.img}" alt="${p.title}"></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4 style="margin:0">${p.title}</h4>
+              <div class="price">$${p.price}</div>
+            </div>
+            <div class="small">${p.desc}</div>
+            <div style="margin-top:8px;display:flex;gap:8px;justify-content:space-between;align-items:center">
+              <div style="display:flex;gap:8px">
+                <button class="btn" onclick="openModal(${p.id})">عرض</button>
+                <button class="btn primary" onclick="addProductToCart(${p.id})">أضف للسلة</button>
+              </div>
+              <div class="rating">★ 4.7</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      })
+    }
+
+    function openModal(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      modalTitle.textContent = p.title;
+      modalPrice.textContent = '$' + p.price;
+      modalDesc.textContent = p.desc;
+      modalImage.innerHTML = `<img src="${p.img}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover">`;
+      modal.classList.add('open');
+    }
+    closeModal.addEventListener('click', ()=>modal.classList.remove('open'));
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open') });
+
+    function addProductToCart(id){
+      cartCount += 1;
+      cartBtn.textContent = `سلة (${cartCount})`;
+      // simple feedback
+      cartBtn.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:220});
+    }
+
+    // search
+    searchInput.addEventListener('input', (e)=>{
+      const q = e.target.value.trim().toLowerCase();
+      if(!q) return renderProducts(products);
+      const filtered = products.filter(p=>p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      renderProducts(filtered);
+    });
+
+    // initial render
+    renderProducts(products);
+  </script>
+</body>
+</html>
