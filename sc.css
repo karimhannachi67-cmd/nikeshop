@@ -1,0 +1,224 @@
+/* -------------------- إعدادات الخطوط والألوان -------------------- */
+:root {
+    --primary-focus: #1abc9c;     /* أخضر مائي/ذهبي عصري للتركيز */
+    --accent-color: #f39c12;      /* برتقالي للأزرار أو الأسعار */
+    --text-dark: #2c3e50;         /* لون نص غامق وأنيق */
+    --text-light: #7f8c8d;        /* لون نص ثانوي */
+    --background-soft: #fcfcfc;   /* خلفية فاتحة جداً */
+    --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-soft);
+    color: var(--text-dark);
+    direction: rtl;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+h1, h2 {
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* -------------------- الهيدر -------------------- */
+header {
+    background-color: var(--text-dark); 
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 25px;
+    transition: color 0.3s;
+    opacity: 0.8;
+}
+
+nav span.active {
+    color: var(--primary-focus);
+    opacity: 1;
+    font-weight: 600;
+}
+
+/* -------------------- تخطيط الصفحة (Checkout Layout) -------------------- */
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* تغيير بسيط: الملخص أضيق من النموذج */
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.shipping-info, .cart-summary {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    height: fit-content;
+}
+
+/* -------------------- نموذج البيانات -------------------- */
+.customer-form {
+    margin-top: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.customer-form input, .customer-form select, .customer-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: 'Cairo', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.customer-form input:focus, .customer-form select:focus, .customer-form textarea:focus {
+    border-color: var(--primary-focus);
+    outline: none;
+}
+
+.confirm-order-btn {
+    width: 100%;
+    background-color: var(--primary-focus);
+    color: white;
+    padding: 16px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 30px;
+}
+
+.confirm-order-btn:hover {
+    background-color: #16a085;
+}
+
+/* -------------------- ملخص السلة -------------------- */
+.cart-items-list {
+    margin-bottom: 25px;
+}
+
+.cart-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-thumbnail {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-details h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+}
+
+.item-details span {
+    font-size: 0.9em;
+    color: var(--text-light);
+}
+
+.item-price {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.pricing-details {
+    padding-top: 15px;
+}
+
+.pricing-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.separator {
+    border: 0;
+    border-top: 2px dashed #eee;
+    margin: 15px 0;
+}
+
+.total-amount h3 {
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.final-price {
+    color: var(--primary-focus) !important;
+    font-size: 1.8em !important;
+    font-weight: 700 !important;
+}
+
+/* -------------------- الفوتر -------------------- */
+footer {
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+/* -------------------- استجابة الشاشات الصغيرة (Mobile) -------------------- */
+@media (max-width: 850px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-summary {
+        order: -1;
+    }
+}
