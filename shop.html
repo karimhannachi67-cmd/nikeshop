@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إكمال الطلب - متجر احترافي</title>
+    <link rel="stylesheet" href="sc.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">nike shop</a>
+            <nav>
+                <a href="index2.html">principale</a>
+                <span class="cart-link active">🛒 سلة المشتريات</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>إكمال الطلب الآمن</h1>
+        
+        <div class="checkout-layout">
+            
+            <section class="cart-summary">
+                <h2>2. ملخص الطلب والمنتجات</h2>
+                
+                <div class="cart-items-list">
+                    <div class="cart-item">
+                        <img src="product1.jpg" alt="هاتف ذكي" class="item-thumbnail">
+                        <div class="item-details">
+                            <h4>هاتف ذكي S Pro</h4>
+                            <span class="quantity">الكمية: 1</span>
+                            <span class="item-price">55,000 د.ج</span>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <img src="product2.jpg" alt="ساعة ذكية" class="item-thumbnail">
+                        <div class="item-details">
+                            <h4>ساعة ذكية فاخرة</h4>
+                            <span class="quantity">الكمية: 1</span>
+                            <span class="item-price">24,000 د.ج</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-details">
+                    <div class="pricing-row">
+                        <span>الإجمالي الفرعي:</span>
+                        <span>79,000 د.ج</span>
+                    </div>
+                    <div class="pricing-row shipping-cost">
+                        <span>تكلفة الشحن:</span>
+                        <span>700 د.ج</span>
+                    </div>
+                    <hr class="separator">
+                    <div class="pricing-row total-amount">
+                        <h3>المجموع الكلي:</h3>
+                        <h3 class="final-price">79,700 د.ج</h3>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="shipping-info">
+                <h2>1. معلومات الشحن والتوصيل</h2>
+                
+                <form action="/submit-order" method="POST" class="customer-form">
+                    
+                    <div class="form-group">
+                        <label for="full_name">الاسم واللقب (الكامل):</label>
+                        <input type="text" id="full_name" name="full_name" placeholder="أدخل اسمك ولقبك" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="مثال: 05xxxxxxx" pattern="[0-9]{10}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="wilaya">الولاية:</label>
+                        <select id="wilaya" name="wilaya" required>
+                            <option value="" disabled selected>-- اختر ولايتك --</option>
+                            <option value="الجزائر">الجزائر</option>
+                            <option value="وهران">وهران</option>
+                            <option value="قسنطينة">قسنطينة</option>
+                            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">العنوان التفصيلي (للتوصيل):</label>
+                        <textarea id="address" name="address" rows="3" placeholder="اسم البلدية، الحي، الشارع..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="confirm-order-btn">
+                        تأكيد الطلب الآن (79,700 د.ج)
+                    </button>
+                    
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 متجر الفخامة. تسوق آمن ومريح.</p>
+        </div>
+    </footer>
+</body>
+</html>
